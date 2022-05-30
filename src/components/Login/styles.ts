@@ -1,27 +1,58 @@
 import styled from "styled-components";
 import pxToRemHelper from "../../utils/helpers/px-to-rem-helper";
 
-export const Title = styled.h1`
-    margin-bottom: ${pxToRemHelper(40)};
-`
+export const Content = styled.div`
 
-export const Form = styled.form`
-    display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50vw;
+
+    min-width: 375px;
+    max-width: 960px;
 `
 
-export const Button = styled.button`
-    margin-top: ${pxToRemHelper(40)};
-`
+export const Body = styled.div`
+    margin: ${pxToRemHelper(40)};
 
-export const FlatButton = styled.p`
-    margin-top: ${pxToRemHelper(40)};
-    text-align: center;
+    .form-title, .form-content, .form-buttons {
+        
+        flex-direction: column;
+        align-items: center;
+    }
 
-    a {
-        font-weight: bold;
-        cursor: pointer;
+    .form-title {
+        margin-bottom: ${pxToRemHelper(40)};
+    
+        img {
+            width: ${pxToRemHelper(30)};
+            height: ${pxToRemHelper(30)};
+        }
+    }
+
+    .form-content {
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .form-buttons {
+        
+        .submit-button {
+            margin-top: ${pxToRemHelper(40)};
+        }
+
+        .register-button {
+            margin-top: ${pxToRemHelper(40)};
+
+            text-align: center;
+
+            a {
+                font-weight: bold;
+                
+                cursor: pointer;
+            }
+        }
     }
 `

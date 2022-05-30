@@ -1,7 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
-import { Button, FlatButton, Form, Title } from './styles'
+import { Body, Content } from './styles'
 
 const RegisterComponent = (): JSX.Element => {
     const [surname, setSurname] = useState('')
@@ -14,68 +12,63 @@ const RegisterComponent = (): JSX.Element => {
     }
 
     return (
-        <div>
-            <Form onSubmit={submitForm}>
-                <Image src={'/logo.svg'} width={30} height={30} />
+        <Content>
+            <Body>
+                <form onSubmit={submitForm}>
+                    <div className="form-title">
+                        <img src={'/logo.svg'} />
+                        <h1>Cadastre-se</h1>
+                    </div>
 
-                <Title>Cadastre-se</Title>
+                    <div className="form-content">
+                        <input
+                            name="surname"
+                            type="text"
+                            value={surname}
+                            onChange={event => setSurname(event.target.value)}
+                            placeholder="Apelido"
+                        />
+                        <input
+                            name="email"
+                            type="email"
+                            value={email}
+                            onChange={event => setEmail(event.target.value)}
+                            placeholder="E-mail"
+                        />
+                        <input
+                            name="password"
+                            type="password"
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                            placeholder="Senha"
+                        />
+                        <input
+                            name="password-confirm"
+                            type="password"
+                            value={passwordConfirmation}
+                            onChange={event =>
+                                setPasswordConfirmation(event.target.value)
+                            }
+                            placeholder="Confirmar senha"
+                        />
+                    </div>
 
-                <input
-                    name="surname"
-                    type="text"
-                    value={surname}
-                    onChange={event => setSurname(event.target.value)}
-                    placeholder="Apelido"
-<<<<<<< HEAD
-                    required
-=======
->>>>>>> 7428a1d59ebd5923bb1cd71f09bd1c2ec2a91c65
-                />
-                <input
-                    name="email"
-                    type="email"
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                    placeholder="E-mail"
-<<<<<<< HEAD
-                    required
-=======
->>>>>>> 7428a1d59ebd5923bb1cd71f09bd1c2ec2a91c65
-                />
-                <input
-                    name="password"
-                    type="password"
-                    value={password}
-                    onChange={event => setPassword(event.target.value)}
-                    placeholder="Senha"
-<<<<<<< HEAD
-                    required
-=======
->>>>>>> 7428a1d59ebd5923bb1cd71f09bd1c2ec2a91c65
-                />
-                <input
-                    name="password-confirm"
-                    type="password"
-                    value={passwordConfirmation}
-                    onChange={event =>
-                        setPasswordConfirmation(event.target.value)
-                    }
-                    placeholder="Confirmar senha"
-<<<<<<< HEAD
-                    required
-=======
->>>>>>> 7428a1d59ebd5923bb1cd71f09bd1c2ec2a91c65
-                />
+                    <div className="form-buttons">
+                        <div className="submit-button">
+                            <a>
+                                <button type="submit">Cadastrar-se</button>
+                            </a>
+                        </div>
 
-                <Button type="submit">Cadastrar-se</Button>
-
-                <Link href={'login'}>
-                    <FlatButton>
-                        Já sou cadastrado, <a>entrar</a>
-                    </FlatButton>
-                </Link>
-            </Form>
-        </div>
+                        <div className="register-button">
+                            <p>
+                                Já sou cadastrado, <a>entrar</a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </Body>
+        </Content>
     )
 }
 

@@ -1,65 +1,44 @@
-import { Content, Line, Menu, Modal, UserNameAndImage } from './style'
+import InRelevanceIcon from '../../utils/icons/in-relevance-icon'
+import MyProfileIcon from '../../utils/icons/my-profile-icon'
+import MyPublicationsIcon from '../../utils/icons/my-publications-icon'
+import { IMenuCompomentProps } from './interfaces/menu-component-props'
+import { Body, Content, Footer, Header } from './style'
 
-const MenuComponent = (): JSX.Element => {
-    const userData = {
-        nickname: 'GNunesBR',
-        profilePicture: 'not-profile-picture-icon.svg',
-    }
-
-    const { nickname, profilePicture } = userData
+const MenuComponent = (props: IMenuCompomentProps): JSX.Element => {
+    const {
+        context: { nickname, profile_picture },
+    } = props
 
     return (
         <Content>
-            <Modal>
-                <UserNameAndImage>
-                    <img src={profilePicture} alt="Profile Picture" />
+            <Header>
+                <div className="profile-info">
+                    <img src={profile_picture} alt="Profile Picture" />
                     <h1>{nickname}</h1>
-                </UserNameAndImage>
-                <Line />
-                <Menu>
+                </div>
+            </Header>
+            <Body>
+                <div className="menu-items">
                     <ul>
                         <li>
-                            <img
-                                src="my-profile-icon.svg"
-                                alt="My Profile Icon"
-                            />
-                            Meu Perfil
+                            <MyProfileIcon />
+                            <span>Meu Perfil</span>
                         </li>
                         <li>
-                            <img
-                                src="my-publications-icon.svg"
-                                alt="My Publications Icon"
-                            />
-                            Publicações
+                            <MyPublicationsIcon />
+                            <span>Publicações</span>
                         </li>
                         <li>
-                            <img
-                                src="in-relevance-icon.svg"
-                                alt="Hot Publications Icon"
-                            />
-                            Em Alta
-                        </li>
-                        <li>
-                            <img
-                                src="my-supporters-icon.svg"
-                                alt="My Followers Icon"
-                            />
-                            Apoiadores
-                        </li>
-                        <li>
-                            <img
-                                src="my-groups-icon.svg"
-                                alt="My Groups Icon"
-                            />
-                            Grupos
-                        </li>
-                        <li>
-                            <img src="exit-icon.svg" alt="Exit Icon" />
-                            Sair
+                            <InRelevanceIcon />
+                            <span>Em Alta</span>
                         </li>
                     </ul>
-                </Menu>
-            </Modal>
+                </div>
+                <div className="exit-button"></div>
+            </Body>
+            <Footer>
+                <button>Sair</button>
+            </Footer>
         </Content>
     )
 }

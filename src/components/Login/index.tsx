@@ -1,7 +1,5 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState } from 'react'
-import { Button, FlatButton, Form, Title } from './styles'
+import { Body, Content } from './styles'
 
 const LoginComponent = (): JSX.Element => {
     const [email, setEmail] = useState('')
@@ -12,51 +10,47 @@ const LoginComponent = (): JSX.Element => {
     }
 
     return (
-        <div>
-            <Form onSubmit={submitForm}>
-                <Image src={'/logo.svg'} width={30} height={30} />
+        <Content>
+            <Body>
+                <form onSubmit={submitForm}>
+                    <div className="form-title">
+                        <img src={'/logo.svg'} />
+                        <h1>Entrar</h1>
+                    </div>
 
-                <Title>Entrar</Title>
+                    <div className="form-content">
+                        <input
+                            name="email"
+                            type="email"
+                            value={email}
+                            onChange={event => setEmail(event.target.value)}
+                            placeholder="E-mail"
+                        />
+                        <input
+                            name="password"
+                            type="password"
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                            placeholder="Senha"
+                        />
+                    </div>
 
-                <input
-                    name="email"
-                    type="email"
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                    placeholder="E-mail"
-<<<<<<< HEAD
-                    required
-=======
->>>>>>> 7428a1d59ebd5923bb1cd71f09bd1c2ec2a91c65
-                />
-                <input
-                    name="password"
-                    type="password"
-                    value={password}
-                    onChange={event => setPassword(event.target.value)}
-                    placeholder="Senha"
-<<<<<<< HEAD
-                    required
-                />
+                    <div className="form-buttons">
+                        <div className="submit-button">
+                            <a>
+                                <button type="submit">Entrar</button>
+                            </a>
+                        </div>
 
-                <Button type="submit">Entrar</Button>
-=======
-                />
-
-                <Link href={'feed'}>
-                    <a>
-                        <Button type="submit">Entrar</Button>
-                    </a>
-                </Link>
->>>>>>> 7428a1d59ebd5923bb1cd71f09bd1c2ec2a91c65
-
-                <Link href={'register'}>
-                    <FlatButton>
-                        Novo por aqui? <a>cadastre-se</a>
-                    </FlatButton>
-                </Link>
-            </Form>
-        </div>
+                        <div className="register-button">
+                            <p>
+                                Novo por aqui? <a>cadastre-se</a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </Body>
+        </Content>
     )
 }
 

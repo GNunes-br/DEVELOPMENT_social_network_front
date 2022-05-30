@@ -17,7 +17,7 @@ export const SearchBox = styled.form`
     align-items: center;
 
     input {
-        background-color: ${props => props.theme.colors.primary_background};
+        background-color: ${props => props.theme.colors.background};
         height: ${pxToRemHelper(50)};
         color: ${props => props.theme.colors.primary};
         width: 60vw;
@@ -41,7 +41,7 @@ export const SearchBox = styled.form`
     button {
         width: 5vw;
         height: 7vh;
-        background-color: ${props => props.theme.colors.primary_background};
+        background-color: ${props => props.theme.colors.background};
         border-radius: 0px ${pxToRemHelper(10)} ${pxToRemHelper(10)} 0px;
 
         :hover {

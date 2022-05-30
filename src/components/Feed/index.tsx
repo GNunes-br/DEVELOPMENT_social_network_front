@@ -1,61 +1,50 @@
-import { useState } from 'react'
-import FilterComponent from '../Filter'
-import PublicationComponent from './Publication'
+import { Modal } from '@mui/material'
+import React, { useState } from 'react'
+import serverMock from '../../utils/server/feed-publications.json'
+import PublicationComponent from '../Publication'
+import PublicationPostComponent from '../Publication-Post'
 import { Feed, FloatingButton, Publications } from './style'
 
 const FeedComponent = (): JSX.Element => {
-    const feedPublications = [
-        {
-            date: '23/05/2022 17:00:00',
-            nickname: 'Anonimo',
-            profile_picture: 'not-profile-picture-icon.svg',
-            profile_route: '',
-            liked: true,
-            likes: 85,
-            content: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            `,
-        },
-        {
-            date: '22/05/2022 17:00:00',
-            nickname: 'GNunesBR',
-            profile_picture: 'not-profile-picture-icon.svg',
-            profile_route: '',
-            liked: false,
-            likes: 100,
-            content: `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-            `,
-        },
-        {
-            date: '21/05/2022 17:00:00',
-            nickname: 'GNunesBR',
-            profile_picture: 'not-profile-picture-icon.svg',
-            profile_route: '',
-            liked: false,
-            likes: 63,
-            content: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.`,
-        },
-    ]
+    const feedPublications: Array<any> = serverMock.data
 
     const [addPubIcon, setAddPubIcon] = useState('denounce-icon.svg')
+    const [open, setOpen] = useState(false)
+
+    const setAddIcon = () => setAddPubIcon('add-icon.svg')
+    const setDenounceIcon = () => setAddPubIcon('denounce-icon.svg')
+    const openPublicationPostModal = () => setOpen(true)
+    const closePublicationPostModal = () => setOpen(false)
 
     return (
         <Feed>
-            <FilterComponent />
             <Publications>
                 {feedPublications.map(publication => {
-                    return <PublicationComponent context={publication} />
+                    const { id } = publication
+
+                    return (
+                        <PublicationComponent key={id} context={publication} />
+                    )
                 })}
             </Publications>
             <FloatingButton>
                 <button
-                    onMouseOver={() => setAddPubIcon('add-icon.svg')}
-                    onMouseOut={() => setAddPubIcon('denounce-icon.svg')}
+                    onClick={openPublicationPostModal}
+                    onMouseOver={setAddIcon}
+                    onMouseOut={setDenounceIcon}
                 >
                     <img src={addPubIcon} alt="" />
                 </button>
             </FloatingButton>
+            <Modal open={open} onClose={closePublicationPostModal}>
+                <PublicationPostComponent
+                    closeModal={closePublicationPostModal}
+                    context={{
+                        nickname: 'GNunesBr',
+                        profile_picture: 'not-profile-picture-icon.svg',
+                    }}
+                />
+            </Modal>
         </Feed>
     )
 }

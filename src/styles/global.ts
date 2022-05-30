@@ -9,8 +9,6 @@ export default createGlobalStyle`
         font-family: Roboto, sans-serif;
     }
 
-<<<<<<< HEAD
-=======
     * {
         scrollbar-width: thin;
         scrollbar-color: #DBDBDB transparent;
@@ -30,9 +28,12 @@ export default createGlobalStyle`
         border-radius: ${pxToRemHelper(10)};
     }
 
->>>>>>> 7428a1d59ebd5923bb1cd71f09bd1c2ec2a91c65
+    div {
+        display: flex;
+    }
+
     body {
-        background: ${ props => props.theme.colors.primary_background };
+        background: ${ props => props.theme.colors.background };
         color: ${ props => props.theme.colors.text };
         font: 700 ${pxToRemHelper(16)} Roboto, sans-serif;
     }
@@ -53,12 +54,16 @@ export default createGlobalStyle`
         font-family: Roboto, sans-serif;
         font-size: ${pxToRemHelper(14)};
         text-align: center;
+        color: ${ props => props.theme.colors.background };
+        
         background-color: ${ props => props.theme.colors.primary };
-        color: ${ props => props.theme.colors.primary_background };
+        
         border: none;
         border-radius: ${pxToRemHelper(10)};
+        
         width: ${pxToRemHelper(275)};
         height: ${pxToRemHelper(45)};
+        
         cursor: pointer;
     }
 

@@ -1,18 +1,15 @@
 import MenuComponent from '../../components/Menu'
-import { Home } from './styles'
+import { IHomeLayoutProps } from './interfaces/home-layout-props'
+import { Content } from './styles'
 
-interface PageProps {
-    context: JSX.Element
-}
-
-const HomeLayout = (props: PageProps): JSX.Element => {
-    const { context } = props
+const HomeLayout = (props: IHomeLayoutProps): JSX.Element => {
+    const { child, context } = props
 
     return (
-        <Home>
-            <MenuComponent />
-            {context}
-        </Home>
+        <Content>
+            <MenuComponent context={context} />
+            {child}
+        </Content>
     )
 }
 

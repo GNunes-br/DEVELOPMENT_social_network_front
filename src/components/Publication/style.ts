@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import pxToRemHelper from "../../../utils/helpers/px-to-rem-helper";
+import pxToRemHelper from "../../utils/helpers/px-to-rem-helper";
 
 export const Publication = styled.div`
     display: flex;
     flex-direction: column;
-    width: 60vw;
+    width: 80vw;
     height: auto;
     background-color: ${props => props.theme.colors.secondary_background};
-    margin-top: ${pxToRemHelper(7.5)};
-    margin-bottom: ${pxToRemHelper(7.5)};
+    margin-bottom: ${pxToRemHelper(15)};
     border-radius: ${pxToRemHelper(10)};
 `
 export const PublicationHeader = styled.div`
@@ -16,7 +15,7 @@ export const PublicationHeader = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 60vw;
+    width: 80vw;
     height: 6vh;
     padding-left: ${pxToRemHelper(20)};
     padding-right: ${pxToRemHelper(20)};
@@ -36,7 +35,7 @@ export const PublicationHeader = styled.div`
 
         p {
             margin-left: ${pxToRemHelper(10)};
-            color: ${props => props.theme.colors.primary_background};
+            color: ${props => props.theme.colors.background};
             font-size: small;
         }
 
@@ -47,7 +46,7 @@ export const PublicationHeader = styled.div`
 
     .date-and-time {
         margin-left: ${pxToRemHelper(10)};
-        color: ${props => props.theme.colors.primary_background};
+        color: ${props => props.theme.colors.background};
         font-size: small;
     }
 `
@@ -55,7 +54,7 @@ export const PublicationHeader = styled.div`
 export const PublicationBody = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 60vw;
     height: auto;
