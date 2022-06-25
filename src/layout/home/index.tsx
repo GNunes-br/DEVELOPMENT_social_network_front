@@ -1,16 +1,29 @@
-import MenuComponent from '../../components/Menu'
-import { IHomeLayoutProps } from './interfaces/home-layout-props'
-import { Content } from './styles'
+import MenuComponent from '../../components/Menu';
+import { Content } from './styles';
 
-const HomeLayout = (props: IHomeLayoutProps): JSX.Element => {
-    const { child, context } = props
+interface Props {
+    child: JSX.Element;
+    user: {
+        nickname: string;
+        profilePicture: string;
+    };
+}
+
+const HomeLayout = (props: Props): JSX.Element => {
+    const {
+        child,
+        user: { nickname, profilePicture },
+    } = props;
 
     return (
         <Content>
-            <MenuComponent context={context} />
+            <MenuComponent
+                nickname={nickname}
+                profilePicture={profilePicture}
+            />
             {child}
         </Content>
-    )
-}
+    );
+};
 
-export default HomeLayout
+export default HomeLayout;

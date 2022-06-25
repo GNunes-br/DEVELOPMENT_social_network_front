@@ -1,33 +1,31 @@
-import { useState } from 'react'
-import findPublicationTagsInTextContentHelper from '../../utils/helpers/find-publication-tags-in-text-content-helper'
-import IPublicationPostComponentProps from './interfaces/publication-post-component-props'
-import { Body, Content, Footer, Header } from './style'
+import { useState } from 'react';
+import findPublicationTagsInTextContentHelper from '../../utils/helpers/find-publication-tags-in-text-content-helper';
+import { Body, Content, Footer, Header } from './style';
 
-const PublicationPostComponent = (
-    props: IPublicationPostComponentProps
-): JSX.Element => {
-    const {
-        closeModal,
-        context: { nickname, profile_picture },
-    } = props
+interface Props {
+    handleCloseModal: () => void;
+}
 
-    const [publicationText, setPublicationText] = useState('')
-    const [publicationTags, setPulicationTags] = useState([])
+const PublicationPostComponent = (props: Props): JSX.Element => {
+    const { handleCloseModal } = props;
 
-    const tagsFoundInPost: boolean = publicationTags.length > 0
+    const [publicationText, setPublicationText] = useState('');
+    const [publicationTags, setPulicationTags] = useState([]);
+
+    const tagsFoundInPost: boolean = publicationTags.length > 0;
 
     const submitForm = async (event: React.FormEvent): Promise<void> => {
-        event.preventDefault()
-    }
+        event.preventDefault();
+    };
 
     return (
         <form action="" id="publication-post-form" onSubmit={submitForm}>
             <Content>
                 <Header>
-                    <img src={profile_picture} alt="Profile Icon" />
+                    <img src={'profile_picture'} alt="Profile Icon" />
                     <div className="header-title">
                         <h1>Criar Publicação</h1>
-                        <p>{nickname}</p>
+                        <p>{'nickname'}</p>
                     </div>
                 </Header>
                 <Body>
@@ -38,13 +36,13 @@ const PublicationPostComponent = (
                             placeholder="Digite aqui..."
                             value={publicationText}
                             onChange={event => {
-                                setPublicationText(event.target.value)
+                                setPublicationText(event.target.value);
 
                                 setPulicationTags(
                                     findPublicationTagsInTextContentHelper(
                                         event.target.value
                                     ) || []
-                                )
+                                );
                             }}
                         >
                             {publicationText}
@@ -53,7 +51,7 @@ const PublicationPostComponent = (
                             {tagsFoundInPost ? (
                                 <ul>
                                     {publicationTags.map(tag => {
-                                        return <li>{tag}</li>
+                                        return <li>{tag}</li>;
                                     })}
                                 </ul>
                             ) : (
@@ -70,7 +68,10 @@ const PublicationPostComponent = (
                     </div>
                 </Body>
                 <Footer>
-                    <button onClick={closeModal} className="cancel-button">
+                    <button
+                        onClick={handleCloseModal}
+                        className="cancel-button"
+                    >
                         Cancelar
                     </button>
                     <button
@@ -82,7 +83,7 @@ const PublicationPostComponent = (
                 </Footer>
             </Content>
         </form>
-    )
-}
+    );
+};
 
-export default PublicationPostComponent
+export default PublicationPostComponent;

@@ -1,97 +1,132 @@
 import styled from "styled-components";
 import pxToRemHelper from "../../utils/helpers/px-to-rem-helper";
 
-export const Publication = styled.div`
-    display: flex;
+export const Content = styled.div`
     flex-direction: column;
-    width: 80vw;
-    height: auto;
+
     background-color: ${props => props.theme.colors.secondary_background};
-    margin-bottom: ${pxToRemHelper(15)};
+
     border-radius: ${pxToRemHelper(10)};
+
+    margin-bottom: ${pxToRemHelper(15)};
 `
-export const PublicationHeader = styled.div`
-    display: flex;
+
+export const Header = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 80vw;
-    height: 6vh;
-    padding-left: ${pxToRemHelper(20)};
-    padding-right: ${pxToRemHelper(20)};
+
+    min-height: 40px;
+    max-height: 50px;
+
     background-color: ${props => props.theme.colors.primary};
+
     border-radius: ${pxToRemHelper(10)} ${pxToRemHelper(10)} 0px 0px;
 
-    .profile-info {
-        display: flex;
+    .group-info {
         flex-direction: row;
-        justify-content: flex-start;
         align-items: center;
 
-        img {
-            width: ${pxToRemHelper(20)};
-            height: ${pxToRemHelper(20)};
-        }
+        margin-left: ${pxToRemHelper(15)};
 
         p {
             margin-left: ${pxToRemHelper(10)};
-            color: ${props => props.theme.colors.background};
-            font-size: small;
-        }
 
-        a {
-            text-decoration: none;
+            color: ${props => props.theme.colors.background};
+            font-size: ${pxToRemHelper(13)};
+            font-weight: 100;
+
+            a {
+                color: ${props => props.theme.colors.background};
+                text-decoration: none;
+                font-size: ${pxToRemHelper(14)};
+                font-weight: 500;
+            }
         }
     }
 
     .date-and-time {
-        margin-left: ${pxToRemHelper(10)};
+
+        margin-right: ${pxToRemHelper(15)};
+
         color: ${props => props.theme.colors.background};
-        font-size: small;
+        font-size: ${pxToRemHelper(13)};
+        text-align: center;
     }
 `
 
-export const PublicationBody = styled.div`
-    display: flex;
-    flex-direction: row;
+export const Body = styled.div`
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    width: 60vw;
-    height: auto;
-    max-height: 30vh;
-    overflow: auto;
-    padding-left: ${pxToRemHelper(20)}; 
-    padding-right: ${pxToRemHelper(20)}; 
-    margin-top: ${pxToRemHelper(20)}; 
-    margin-bottom: ${pxToRemHelper(10)}; 
+    align-items: flex-start;
+
+    padding: ${pxToRemHelper(15)};
     
     .publication-content {
-        max-height: 30vh;
-        font-size: ${pxToRemHelper(15)};
+        
+        max-height: 200px;
+        overflow: auto;
+
+        font-size: ${pxToRemHelper(16)};
+    }
+
+    .publication-tags {
+        margin-top: ${pxToRemHelper(15)};
+
+        ul {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: start;
+                align-items: flex-start;
+                
+                overflow: auto;
+            }
+
+            li {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                
+                background-color: #D4D4D4;
+                                
+                list-style: none;
+                
+                font-size: small;
+                font-weight: normal;
+                text-align: center;
+                color: ${props => props.theme.colors.primary};
+                
+                padding: ${pxToRemHelper(6)};
+
+                margin: ${pxToRemHelper(2)};
+                
+                border-radius: ${pxToRemHelper(5)};
+            }
     }
 `
 
-export const PublicationFooter = styled.div`
-    display: flex;
+export const Footer = styled.div`
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
-    width: 60vw;
-    height: 9vh;
-    padding-left: ${pxToRemHelper(20)};
-    padding-right: ${pxToRemHelper(20)};
+    align-items: stretch;
+
+    min-height: 55px;
+
     background-color: ${props => props.theme.colors.secondary_background};
+
     border-radius: 0px 0px ${pxToRemHelper(10)} ${pxToRemHelper(10)};
 
+    margin-left: ${pxToRemHelper(15)};
+
     .like-button {
-        display: flex;
         flex-direction: column;
         align-items: center;
 
         .like-image {
-        width: ${pxToRemHelper(25)};
-        height: ${pxToRemHelper(25)};
-        cursor: pointer;
+            width: ${pxToRemHelper(25)};
+            height: ${pxToRemHelper(25)};
+            cursor: pointer;
         }
 
         .like-count {

@@ -1,52 +1,61 @@
-import { Modal } from '@mui/material'
-import React, { useState } from 'react'
-import serverMock from '../../utils/server/feed-publications.json'
-import PublicationComponent from '../Publication'
-import PublicationPostComponent from '../Publication-Post'
-import { Feed, FloatingButton, Publications } from './style'
+import { Modal } from '@mui/material';
+import { useState } from 'react';
+import AddIcon from '../../utils/icons/add-icon';
+import PublicationComponent from '../Publication';
+import PublicationPostComponent from '../PublicationPost';
+import { Body, Content } from './style';
 
-const FeedComponent = (): JSX.Element => {
-    const feedPublications: Array<any> = serverMock.data
-
-    const [addPubIcon, setAddPubIcon] = useState('denounce-icon.svg')
-    const [open, setOpen] = useState(false)
-
-    const setAddIcon = () => setAddPubIcon('add-icon.svg')
-    const setDenounceIcon = () => setAddPubIcon('denounce-icon.svg')
-    const openPublicationPostModal = () => setOpen(true)
-    const closePublicationPostModal = () => setOpen(false)
-
-    return (
-        <Feed>
-            <Publications>
-                {feedPublications.map(publication => {
-                    const { id } = publication
-
-                    return (
-                        <PublicationComponent key={id} context={publication} />
-                    )
-                })}
-            </Publications>
-            <FloatingButton>
-                <button
-                    onClick={openPublicationPostModal}
-                    onMouseOver={setAddIcon}
-                    onMouseOut={setDenounceIcon}
-                >
-                    <img src={addPubIcon} alt="" />
-                </button>
-            </FloatingButton>
-            <Modal open={open} onClose={closePublicationPostModal}>
-                <PublicationPostComponent
-                    closeModal={closePublicationPostModal}
-                    context={{
-                        nickname: 'GNunesBr',
-                        profile_picture: 'not-profile-picture-icon.svg',
-                    }}
-                />
-            </Modal>
-        </Feed>
-    )
+interface Props {
+    publications: Array<{
+        id: number;
+        date: string;
+        group: string;
+        group_route: string;
+        liked: boolean;
+        likes: number;
+        tags: Array<string>;
+        content: string;
+    }>;
 }
 
-export default FeedComponent
+const FeedComponent = (props: Props): JSX.Element => {
+    const { publications } = props;
+
+    const [openPublicationPostModal, setOpenPublicationPostModal] =
+        useState(false);
+    const handleOpenModal = () => setOpenPublicationPostModal(true);
+    const handleCloseModal = () => setOpenPublicationPostModal(false);
+
+    return (
+        <Content>
+            <Body>
+                <div className="floating-button">
+                    <button onClick={handleOpenModal}>
+                        <AddIcon />
+                    </button>
+                </div>
+                {publications.length ? (
+                    publications.map(publication => {
+                        const { id } = publication;
+
+                        return (
+                            <PublicationComponent
+                                key={id}
+                                context={publication}
+                            />
+                        );
+                    })
+                ) : (
+                    <div className="empty-feed">
+                        <p>Siga grupos para visualizar novas publicações</p>
+                    </div>
+                )}
+            </Body>
+            <Modal open={openPublicationPostModal}>
+                <PublicationPostComponent handleCloseModal={handleCloseModal} />
+            </Modal>
+        </Content>
+    );
+};
+
+export default FeedComponent;

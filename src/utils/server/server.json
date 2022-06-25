@@ -1,0 +1,113 @@
+{
+  "login": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkX2NsaWVudCI6Ijg5MTcwY2NjLTA4MGUtNDRmNi1hOTQ5LTBiNmY3Y2JlYzBmNyJ9.E_ZouYFcdpkTAbSBPqyIOQKUVqvPz-2VXeWs4RXRq6I"
+  },
+  "feed": {
+    "nickname": "GNunesBr",
+    "profile_picture": "bear-icon.svg"
+  },
+  "register": [
+    {
+      "surname": "teste",
+      "email": "teste@teste.com",
+      "password": "teste",
+      "passwordConfirmation": "teste",
+      "id": 1
+    },
+    {
+      "surname": "dev",
+      "email": "dev@dev.com",
+      "password": "123",
+      "passwordConfirmation": "123",
+      "id": 2
+    }
+  ],
+  "publications":{
+      "nickname": "GNunesBr-User",
+      "profile_picture": "bear-icon.svg",
+      "publications": [
+        {
+          "id": 1,
+          "date": "23/05/2022 17:00:00",
+          "group": "Teste",
+          "group_route": "",
+          "liked": true,
+          "likes": 85,
+          "tags": [
+            "#olaMundo",
+            "#primeiraPub",
+            "#teste"
+          ],
+          "content": "No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente. No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente."
+        },
+        {
+          "id": 1,
+          "date": "23/05/2022 17:00:00",
+          "group": "Teste",
+          "group_route": "",
+          "liked": true,
+          "likes": 85,
+          "tags": [
+            "#olaMundo",
+            "#primeiraPub",
+            "#teste"
+          ],
+          "content": "No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente. No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente."
+        },
+        {
+          "id": 1,
+          "date": "23/05/2022 17:00:00",
+          "liked": true,
+          "likes": 85,
+          "tags": [
+            "#olaMundo",
+            "#primeiraPub",
+            "#teste"
+          ],
+          "content": "No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente. No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente."
+        },
+        {
+          "id": 1,
+          "date": "23/05/2022 17:00:00",
+          "group": "Teste",
+          "group_route": "",
+          "liked": true,
+          "likes": 85,
+          "tags": [
+            "#olaMundo",
+            "#primeiraPub",
+            "#teste"
+          ],
+          "content": "No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente. No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente."
+        },
+        {
+          "id": 1,
+          "date": "23/05/2022 17:00:00",
+          "group": "Teste",
+          "group_route": "",
+          "liked": true,
+          "likes": 85,
+          "tags": [
+            "#olaMundo",
+            "#primeiraPub",
+            "#teste"
+          ],
+          "content": "No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente. No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente."
+        },
+        {
+          "id": 1,
+          "date": "23/05/2022 17:00:00",
+          "group": "Teste",
+          "group_route": "",
+          "liked": true,
+          "likes": 85,
+          "tags": [
+            "#olaMundo",
+            "#primeiraPub",
+            "#teste"
+          ],
+          "content": "No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente. No site do Ibama também é disponibilizado um serviço para registro de ocorrências on-line. Para fazer a denúncia via internet (e/ou manifesto, reclamação, sugestão, informação)é preciso acessar a página específica do Instituto e preencher os dados corretamente."
+        }
+      ]
+    }
+}

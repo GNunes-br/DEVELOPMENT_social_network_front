@@ -12,8 +12,11 @@ export const Content = styled.div`
     background-color: ${ props => props.theme.colors.background };
     border-radius: ${pxToRemHelper(15)};
 
-    height: 65.6vh;
-    width: 60vw;
+    min-height: 440px;
+    max-height: 500px;
+
+    min-width: 820px;
+    max-width: 920px;
     
     transform: translate(-50%, -50%);
 `
@@ -24,8 +27,10 @@ export const Header = styled.div`
 
     background-color: ${ props => props.theme.colors.primary };
 
-    height: 10vh;
-    width: 60vw;
+    min-height: 40px;
+    max-height: 50px;
+
+    width: 100%;
 
     border-radius: ${pxToRemHelper(10)} ${pxToRemHelper(10)} 0px 0px;
 
@@ -67,13 +72,17 @@ export const Body = styled.div`
 
         background-color: ${ props => props.theme.colors.background };
         
-        height: 50vh;
-        width: 60vw;
+        min-height: 330px;
+        max-height: 400px;
+
+        width: 100%;
 
         textarea {
 
-            height: 38vh;
-            width: 59vw;
+            min-height: 250px;
+            max-height: 320px;
+
+            width: 98%;
 
             background-color: ${ props => props.theme.colors.secondary_background };
 
@@ -95,8 +104,10 @@ export const Body = styled.div`
         .tags-area {
             flex-direction: row;
 
-            height: 9vh;
-            width: 59vw;
+            min-height: 60px;
+            max-height: 70px;
+
+            width: 98%;
 
             padding: ${pxToRemHelper(5)};
 
@@ -159,8 +170,10 @@ export const Footer = styled.div`
     justify-content: flex-end;
     align-items: flex-start;
 
-    height: 6.5vh;
-    width: 60vw;
+    min-height: 40px;
+    max-height: 50px;
+
+    width: 100%;
 
     border-radius: 0px 0px ${pxToRemHelper(10)} ${pxToRemHelper(10)};
 

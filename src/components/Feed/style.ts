@@ -1,48 +1,81 @@
 import styled from "styled-components";
 import pxToRemHelper from "../../utils/helpers/px-to-rem-helper";
 
-export const Feed = styled.div`
-    display: flex;
+export const Content = styled.div`
     flex-direction: column;
     justify-content: start;
-    width: 87vw;
-    height: 100vh;
+
+    min-width: 720px;
+    max-width: 1450px;
+
+    max-height: 1465px;
+
     background-color: ${props => props.theme.colors.background};
-`
-export const Publications = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 87vw;
-    margin-top: ${pxToRemHelper(15)};
-    margin-bottom: ${pxToRemHelper(15)};
-    overflow: auto;
+
+    padding-left: 0;
+    padding-right: ${pxToRemHelper(15)};
+    padding-top: ${pxToRemHelper(15)};
+    padding-bottom: ${pxToRemHelper(15)};
 `
 
-export const FloatingButton = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    
-    button {
-        display: flex;
-        position:fixed;
+export const Body = styled.div`
+    flex-direction: column;
+    align-items: center;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .empty-feed {
         justify-content: center;
-        align-items: center;
-        width: ${pxToRemHelper(60)};
-        height: ${pxToRemHelper(60)};
-        bottom: ${pxToRemHelper(40)};
-        right: ${pxToRemHelper(40)};
-        background-color: ${props => props.theme.colors.primary};
-        color: ${props => props.theme.colors.background};
-        border-radius: 50%;
-        text-align: center;
-        font-size: ${pxToRemHelper(30)};
-        box-shadow: 1px 1px 2px #888;
-        z-index:1000;
+
+        width: 80vw;
+
+        p {
+            text-align: center;
+        }
     }
-    
-    img {
-        width: ${pxToRemHelper(30)};
-        height: ${pxToRemHelper(30)};
+
+    .floating-button {
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: fixed;
+
+            width: 50px;
+            height: 50px;
+
+            bottom: 40px;
+            right: 40px;
+
+            background-color: ${props => props.theme.colors.primary};
+
+            border-radius: 50%;
+            border: 1px solid #FFFFFF;
+
+            box-shadow: 1px 1px 2px #888;
+
+            z-index: 1000;
+
+            transition: transform .3s;
+
+            :hover {
+                transform:scale(1.2,1.2) 
+            }
+
+            svg {
+                fill: #FFFFFF;
+
+                height: 40px;
+                width: 40px;
+
+                transition: transform .3s ease-in-out;
+
+                :hover {
+                    transform: rotate(90deg);
+                }
+            }
+        }
     }
 `

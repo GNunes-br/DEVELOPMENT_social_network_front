@@ -64,11 +64,9 @@ export const Body = styled.div`
 
     overflow: auto;
 
-    .menu-items {   
-        
-        ul {
-            width: 100%;
-        }
+    .menu-items {
+
+        width: 100%;
         
         li {
             display: flex;

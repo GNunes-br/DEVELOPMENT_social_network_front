@@ -15,8 +15,7 @@ export default createGlobalStyle`
     }
 
     *::-webkit-scrollbar {
-        width: ${pxToRemHelper(5)};
-        height: ${pxToRemHelper(5)};
+        width: ${pxToRemHelper(4)};
     }
 
     *::-webkit-scrollbar-track {

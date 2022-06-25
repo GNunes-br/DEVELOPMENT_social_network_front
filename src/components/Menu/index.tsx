@@ -1,19 +1,22 @@
-import InRelevanceIcon from '../../utils/icons/in-relevance-icon'
-import MyProfileIcon from '../../utils/icons/my-profile-icon'
-import MyPublicationsIcon from '../../utils/icons/my-publications-icon'
-import { IMenuCompomentProps } from './interfaces/menu-component-props'
-import { Body, Content, Footer, Header } from './style'
+import InRelevanceIcon from '../../utils/icons/in-relevance-icon';
+import MyGroupsIcon from '../../utils/icons/my-groups-icon';
+import MyProfileIcon from '../../utils/icons/my-profile-icon';
+import MyPublicationsIcon from '../../utils/icons/my-publications-icon';
+import { Body, Content, Footer, Header } from './style';
 
-const MenuComponent = (props: IMenuCompomentProps): JSX.Element => {
-    const {
-        context: { nickname, profile_picture },
-    } = props
+interface Props {
+    nickname: string;
+    profilePicture: string;
+}
+
+const MenuComponent = (props: Props): JSX.Element => {
+    const { nickname, profilePicture } = props;
 
     return (
         <Content>
             <Header>
                 <div className="profile-info">
-                    <img src={profile_picture} alt="Profile Picture" />
+                    <img src={profilePicture} alt="Profile Picture" />
                     <h1>{nickname}</h1>
                 </div>
             </Header>
@@ -23,6 +26,10 @@ const MenuComponent = (props: IMenuCompomentProps): JSX.Element => {
                         <li>
                             <MyProfileIcon />
                             <span>Meu Perfil</span>
+                        </li>
+                        <li>
+                            <MyGroupsIcon />
+                            <span>Meus Grupos</span>
                         </li>
                         <li>
                             <MyPublicationsIcon />
@@ -40,7 +47,7 @@ const MenuComponent = (props: IMenuCompomentProps): JSX.Element => {
                 <button>Sair</button>
             </Footer>
         </Content>
-    )
-}
+    );
+};
 
-export default MenuComponent
+export default MenuComponent;

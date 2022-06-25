@@ -1,69 +1,54 @@
-import { useState } from 'react'
-import {
-    Publication,
-    PublicationBody,
-    PublicationFooter,
-    PublicationHeader,
-} from './style'
+import { useState } from 'react';
+import { Body, Content, Footer, Header } from './style';
 
-interface ComponentProps {
-    context: {
-        date: string
-        nickname: string
-        profile_picture: string
-        profile_route: string
-        liked: boolean
-        likes: number
-        content: string
-    }
-}
-
-const PublicationComponent = (props: ComponentProps): JSX.Element => {
+const PublicationComponent = (props: any): JSX.Element => {
     const {
-        context: {
-            liked,
-            likes,
-            nickname,
-            content,
-            profile_picture,
-            profile_route,
-            date,
-        },
-    } = props
+        context: { liked, likes, group, content, group_route, date, tags },
+    } = props;
 
-    const [like, setLike] = useState(liked)
+    const [like, setLike] = useState(liked);
     const [likeImageRoute, setLikeImageRoute] = useState(
         liked ? 'liked-icon.svg' : 'not-like-icon.svg'
-    )
-    const [numbersOfLikes, setNumbersOfLikes] = useState(likes)
+    );
+    const [numbersOfLikes, setNumbersOfLikes] = useState(likes);
 
     function likedPublication(): void {
-        setLike(true)
-        setLikeImageRoute('liked-icon.svg')
-        setNumbersOfLikes(numbersOfLikes + 1)
+        setLike(true);
+        setLikeImageRoute('liked-icon.svg');
+        setNumbersOfLikes(numbersOfLikes + 1);
     }
 
     function unlikedPublication(): void {
-        setLike(false)
-        setLikeImageRoute('not-like-icon.svg')
-        setNumbersOfLikes(numbersOfLikes - 1)
+        setLike(false);
+        setLikeImageRoute('not-like-icon.svg');
+        setNumbersOfLikes(numbersOfLikes - 1);
     }
 
     return (
-        <Publication>
-            <PublicationHeader>
-                <div className="profile-info">
-                    <img src={profile_picture} alt="Profile Picture" />
-                    <a href={profile_route}>
-                        <p>{nickname}</p>
-                    </a>
+        <Content>
+            <Header>
+                <div className="group-info">
+                    <p>
+                        <a href={group_route}> {group}</a>
+                    </p>
                 </div>
                 <p className="date-and-time">{date}</p>
-            </PublicationHeader>
-            <PublicationBody>
+            </Header>
+            <Body>
                 <p className="publication-content">{content}</p>
-            </PublicationBody>
-            <PublicationFooter>
+                {tags.length ? (
+                    <div className="publication-tags">
+                        <ul>
+                            {tags.map((tag: string) => {
+                                return <li key={tag}>{tag}</li>;
+                            })}
+                        </ul>
+                    </div>
+                ) : (
+                    <div></div>
+                )}
+            </Body>
+            <Footer>
                 <div className="like-button">
                     <img
                         className="like-image"
@@ -71,17 +56,17 @@ const PublicationComponent = (props: ComponentProps): JSX.Element => {
                         alt=""
                         onClick={() => {
                             if (!like) {
-                                likedPublication()
+                                likedPublication();
                             } else {
-                                unlikedPublication()
+                                unlikedPublication();
                             }
                         }}
                     />
                     <p className="like-count">{numbersOfLikes}</p>
                 </div>
-            </PublicationFooter>
-        </Publication>
-    )
-}
+            </Footer>
+        </Content>
+    );
+};
 
-export default PublicationComponent
+export default PublicationComponent;
