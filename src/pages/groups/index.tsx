@@ -1,52 +1,44 @@
+import { useEffect, useState } from 'react';
 import GroupsComponent from '../../components/Groups';
-import HomeLayout from '../../layout/Home';
+import HomeLayout from '../../layout/home';
 import { api } from '../../services/api';
 
-interface Props {
-    user: {
-        nickname: string;
-        profilePicture: string;
-    };
-    groups: Array<any>;
-}
+const GroupsPage = (): JSX.Element => {
+    const [user, setUser] = useState(null);
+    const [groups, setGroups] = useState(null);
 
-const GroupsPage = (props: Props): JSX.Element => {
-    const { user, groups } = props;
+    useEffect(() => {
+        api.get('/user').then(success => {
+            setUser({
+                nickname: success.data.name,
+                email: success.data.email,
+                profilePicture: 'not-profile-picture-icon.svg',
+            });
+        });
 
-    return (
-        <HomeLayout child={<GroupsComponent groups={groups} />} user={user} />
-    );
-};
+        api.get('/group').then(success => {
+            setGroups(success.data);
+        });
+    }, []);
 
-export async function getStaticProps(ctx: any) {
-    try {
-        const userDetailsResponse = await api.get('/user');
-
-        const groupsResponse = await api.get('/group');
-
-        const {
-            data: { name: nickname },
-        } = userDetailsResponse;
-
-        const { data: groups } = groupsResponse;
-
-        return {
-            props: {
-                user: {
-                    nickname,
+    if (groups && user) {
+        return (
+            <HomeLayout
+                child={<GroupsComponent groups={groups} />}
+                user={user}
+            />
+        );
+    } else {
+        return (
+            <HomeLayout
+                child={<GroupsComponent groups={[]} />}
+                user={{
+                    nickname: '...',
                     profilePicture: 'not-profile-picture-icon.svg',
-                },
-                groups,
-            },
-        };
-    } catch (error) {
-        return {
-            redirect: {
-                destination: '/login',
-                permanent: false,
-            },
-        };
+                }}
+            />
+        );
     }
-}
+};
 
 export default GroupsPage;

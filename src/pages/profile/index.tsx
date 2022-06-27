@@ -1,46 +1,44 @@
+import { useEffect, useState } from 'react';
 import ProfileComponent from '../../components/Profile';
-import HomeLayout from '../../layout/Home';
+import HomeLayout from '../../layout/home';
 import { api } from '../../services/api';
 
-interface Props {
-    user: {
-        nickname: string;
-        email: string;
-        profilePicture: string;
-    };
-}
+const ProfilePage = (): JSX.Element => {
+    const [user, setUser] = useState(null);
 
-const ProfilePage = (props: Props): JSX.Element => {
-    const { user } = props;
+    useEffect(() => {
+        api.get('/user').then(success => {
+            setUser({
+                nickname: success.data.name,
+                email: success.data.email,
+                profilePicture: 'not-profile-picture-icon.svg',
+            });
+        });
+    }, []);
 
-    return <HomeLayout child={<ProfileComponent user={user} />} user={user} />;
-};
-
-export async function getStaticProps(ctx: any) {
-    try {
-        const userDetailsResponse = await api.get('/user');
-
-        const {
-            data: { name: nickname, email },
-        } = userDetailsResponse;
-
-        return {
-            props: {
-                user: {
-                    nickname,
-                    email,
+    if (user) {
+        return (
+            <HomeLayout child={<ProfileComponent user={user} />} user={user} />
+        );
+    } else {
+        return (
+            <HomeLayout
+                child={
+                    <ProfileComponent
+                        user={{
+                            email: '...',
+                            nickname: '...',
+                            profilePicture: 'not-profile-picture-icon.svg',
+                        }}
+                    />
+                }
+                user={{
+                    nickname: '...',
                     profilePicture: 'not-profile-picture-icon.svg',
-                },
-            },
-        };
-    } catch (error) {
-        return {
-            redirect: {
-                destination: '/login',
-                permanent: false,
-            },
-        };
+                }}
+            />
+        );
     }
-}
+};
 
 export default ProfilePage;

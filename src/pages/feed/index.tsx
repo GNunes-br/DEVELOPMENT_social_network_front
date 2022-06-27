@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import FeedComponent from '../../components/Feed';
-import HomeLayout from '../../layout/Home';
+import HomeLayout from '../../layout/home';
 import { api } from '../../services/api';
 
 interface Props {
@@ -11,57 +12,61 @@ interface Props {
     groups: Array<any>;
 }
 
-const FeedPage = (props: Props): JSX.Element => {
-    const { user, publications, groups } = props;
+const FeedPage = (): JSX.Element => {
+    const [user, setUser] = useState(null);
+    const [groups, setGroups] = useState(null);
+    const [publications, setPublications] = useState(null);
 
-    return (
-        <HomeLayout
-            child={
-                <FeedComponent
-                    publications={publications}
-                    user={user}
-                    groups={groups}
-                />
-            }
-            user={user}
-        />
-    );
-};
+    useEffect(() => {
+        api.get('/user').then(success => {
+            setUser({
+                nickname: success.data.name,
+                profilePicture: 'not-profile-picture-icon.svg',
+            });
+        });
 
-export async function getStaticProps(ctx: any) {
-    try {
-        const publicationsResponse = await api.get('/publication');
+        api.get('/group').then(success => {
+            setGroups(success.data);
+        });
 
-        const userDetailsResponse = await api.get('/user');
+        api.get('/publication').then(success => {
+            setPublications(success.data);
+        });
+    }, []);
 
-        const groupsResponse = await api.get('/group');
-
-        const publications = publicationsResponse.data;
-
-        const {
-            data: { name: nickname },
-        } = userDetailsResponse;
-
-        const { data: groups } = groupsResponse;
-
-        return {
-            props: {
-                user: {
-                    nickname,
+    if (user && groups && publications) {
+        return (
+            <HomeLayout
+                child={
+                    <FeedComponent
+                        publications={publications}
+                        user={user}
+                        groups={groups}
+                    />
+                }
+                user={user}
+            />
+        );
+    } else {
+        return (
+            <HomeLayout
+                child={
+                    <FeedComponent
+                        publications={[]}
+                        user={{
+                            nickname: '...',
+                            profilePicture: 'not-profile-picture-icon.svg',
+                        }}
+                        groups={[]}
+                    />
+                }
+                user={{
+                    nickname: '...',
                     profilePicture: 'not-profile-picture-icon.svg',
-                },
-                publications,
-                groups,
-            },
-        };
-    } catch (error) {
-        return {
-            redirect: {
-                destination: '/login',
-                permanent: false,
-            },
-        };
+                }}
+            />
+        );
     }
-}
+};
 
 export default FeedPage;
