@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 export const api = axios.create({
-    baseURL: 'http://localhost:3333',
+    baseURL: 'http://18.228.152.139:80',
 });
 
 api.interceptors.request.use((request: any) => {

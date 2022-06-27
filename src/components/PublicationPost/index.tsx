@@ -53,7 +53,7 @@ const PublicationPostComponent = (props: Props): JSX.Element => {
         setPostPubError(false);
 
         await api
-            .post('/publication_create', {
+            .post('/publication/create', {
                 text: publicationText,
                 tags: publicationTags,
                 group_name: publicationGroup,

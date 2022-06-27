@@ -25,7 +25,14 @@
       ]
     }
   ],
-  "publication_create": [],
+  "publication_create": [
+    {
+      "text": "dede",
+      "tags": [],
+      "group_name": "Amigos do Bem",
+      "id": 1
+    }
+  ],
   "publication_like": [
     {
       "idPublication": 1,

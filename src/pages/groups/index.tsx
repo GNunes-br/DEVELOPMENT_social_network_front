@@ -14,10 +14,10 @@ const GroupsPage = (): JSX.Element => {
                 email: success.data.email,
                 profilePicture: 'not-profile-picture-icon.svg',
             });
-        });
 
-        api.get('/group').then(success => {
-            setGroups(success.data);
+            api.get('/group').then(success => {
+                setGroups(success.data);
+            });
         });
     }, []);
 

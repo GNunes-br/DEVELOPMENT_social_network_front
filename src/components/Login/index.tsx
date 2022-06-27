@@ -55,7 +55,7 @@ const LoginComponent = (): JSX.Element => {
                         <div className="form-content">
                             <input
                                 name="nickname"
-                                type="nickname"
+                                type={'text'}
                                 value={nickname}
                                 onChange={event =>
                                     setNickname(event.target.value)

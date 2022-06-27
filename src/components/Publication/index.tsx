@@ -30,7 +30,7 @@ const PublicationComponent = (props: any): JSX.Element => {
         setLikeOrUnlikeError(false);
 
         await api
-            .post('/publication_like', {
+            .post('/publication/like', {
                 idPublication: id_publication,
             })
             .catch(error => {

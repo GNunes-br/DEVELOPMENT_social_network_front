@@ -3,15 +3,6 @@ import FeedComponent from '../../components/Feed';
 import HomeLayout from '../../layout/home';
 import { api } from '../../services/api';
 
-interface Props {
-    user: {
-        nickname: string;
-        profilePicture: string;
-    };
-    publications: Array<any>;
-    groups: Array<any>;
-}
-
 const FeedPage = (): JSX.Element => {
     const [user, setUser] = useState(null);
     const [groups, setGroups] = useState(null);
@@ -23,14 +14,14 @@ const FeedPage = (): JSX.Element => {
                 nickname: success.data.name,
                 profilePicture: 'not-profile-picture-icon.svg',
             });
-        });
 
-        api.get('/group').then(success => {
-            setGroups(success.data);
-        });
+            api.get('/group').then(success => {
+                setGroups(success.data);
 
-        api.get('/publication').then(success => {
-            setPublications(success.data);
+                api.get('/publication').then(success => {
+                    setPublications(success.data);
+                });
+            });
         });
     }, []);
 

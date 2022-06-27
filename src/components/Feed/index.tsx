@@ -51,8 +51,7 @@ const FeedComponent = (props: Props): JSX.Element => {
                 ) : (
                     <div className="empty-feed">
                         <p>
-                            Explore ou crie um novo grupo para visualizar as
-                            publicações
+                            Participe de um grupo para visualizar as publicações
                         </p>
                     </div>
                 )}

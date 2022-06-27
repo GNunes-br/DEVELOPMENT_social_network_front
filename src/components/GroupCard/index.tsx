@@ -27,7 +27,7 @@ const GroupCardComponent = (props: Props): JSX.Element => {
         setToParticipateError(false);
 
         await api
-            .post('/group_user', {
+            .post('/group/user', {
                 groupname: name,
             })
             .catch(error => {
