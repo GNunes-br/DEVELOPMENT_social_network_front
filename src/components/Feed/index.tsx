@@ -6,20 +6,23 @@ import PublicationPostComponent from '../PublicationPost';
 import { Body, Content } from './style';
 
 interface Props {
+    user: {
+        nickname: string;
+        profilePicture: string;
+    };
     publications: Array<{
-        id: number;
+        id_publication: number;
         date: string;
-        group: string;
-        group_route: string;
-        liked: boolean;
+        group_name: string;
         likes: number;
-        tags: Array<string>;
+        tags: Array<{ text: string }>;
         content: string;
     }>;
+    groups: Array<any>;
 }
 
 const FeedComponent = (props: Props): JSX.Element => {
-    const { publications } = props;
+    const { publications, user, groups } = props;
 
     const [openPublicationPostModal, setOpenPublicationPostModal] =
         useState(false);
@@ -36,23 +39,29 @@ const FeedComponent = (props: Props): JSX.Element => {
                 </div>
                 {publications.length ? (
                     publications.map(publication => {
-                        const { id } = publication;
+                        const { id_publication } = publication;
 
                         return (
                             <PublicationComponent
-                                key={id}
+                                key={id_publication}
                                 context={publication}
                             />
                         );
                     })
                 ) : (
                     <div className="empty-feed">
-                        <p>Siga grupos para visualizar novas publicações</p>
+                        <p>
+                            Explore ou crie um novo grupo para visualizar as
+                            publicações
+                        </p>
                     </div>
                 )}
             </Body>
             <Modal open={openPublicationPostModal}>
-                <PublicationPostComponent handleCloseModal={handleCloseModal} />
+                <PublicationPostComponent
+                    handleCloseModal={handleCloseModal}
+                    context={{ ...user, groups }}
+                />
             </Modal>
         </Content>
     );

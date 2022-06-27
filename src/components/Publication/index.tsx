@@ -1,9 +1,19 @@
 import { useState } from 'react';
+import { api } from '../../services/api';
+import AlertMessageComponent from '../AlertMessage';
 import { Body, Content, Footer, Header } from './style';
 
 const PublicationComponent = (props: any): JSX.Element => {
     const {
-        context: { liked, likes, group, content, group_route, date, tags },
+        context: {
+            id_publication,
+            liked,
+            likes,
+            group_name,
+            content,
+            date,
+            tags,
+        },
     } = props;
 
     const [like, setLike] = useState(liked);
@@ -12,60 +22,90 @@ const PublicationComponent = (props: any): JSX.Element => {
     );
     const [numbersOfLikes, setNumbersOfLikes] = useState(likes);
 
+    const [likeOrUnlikeError, setLikeOrUnlikeError] = useState(false);
+    const [likeOrUnlikeErrorMessage, setLikeOrUnlikeErrorMessage] =
+        useState('');
+
+    const submitForm = async (): Promise<void> => {
+        setLikeOrUnlikeError(false);
+
+        await api
+            .post('/publication_like', {
+                idPublication: id_publication,
+            })
+            .catch(error => {
+                if (error?.response?.error?.message) {
+                    const errorMessage = error.response.error.message;
+                    setLikeOrUnlikeErrorMessage(errorMessage);
+                } else {
+                    setLikeOrUnlikeErrorMessage('Algo inesperado aconteceu!');
+                }
+                setLikeOrUnlikeError(true);
+            });
+    };
+
     function likedPublication(): void {
         setLike(true);
         setLikeImageRoute('liked-icon.svg');
         setNumbersOfLikes(numbersOfLikes + 1);
+        submitForm();
     }
 
     function unlikedPublication(): void {
         setLike(false);
         setLikeImageRoute('not-like-icon.svg');
         setNumbersOfLikes(numbersOfLikes - 1);
+        submitForm();
     }
 
     return (
-        <Content>
-            <Header>
-                <div className="group-info">
-                    <p>
-                        <a href={group_route}> {group}</a>
-                    </p>
-                </div>
-                <p className="date-and-time">{date}</p>
-            </Header>
-            <Body>
-                <p className="publication-content">{content}</p>
-                {tags.length ? (
-                    <div className="publication-tags">
-                        <ul>
-                            {tags.map((tag: string) => {
-                                return <li key={tag}>{tag}</li>;
-                            })}
-                        </ul>
+        <div>
+            <Content>
+                <Header>
+                    <div className="group-info">
+                        <p>{group_name}</p>
                     </div>
-                ) : (
-                    <div></div>
-                )}
-            </Body>
-            <Footer>
-                <div className="like-button">
-                    <img
-                        className="like-image"
-                        src={likeImageRoute}
-                        alt=""
-                        onClick={() => {
-                            if (!like) {
-                                likedPublication();
-                            } else {
-                                unlikedPublication();
-                            }
-                        }}
-                    />
-                    <p className="like-count">{numbersOfLikes}</p>
-                </div>
-            </Footer>
-        </Content>
+                    <p className="date-and-time">{date}</p>
+                </Header>
+                <Body>
+                    <p className="publication-content">{content}</p>
+                    {tags.length ? (
+                        <div className="publication-tags">
+                            <ul>
+                                {tags.map((tag: { text: string }) => {
+                                    return <li key={tag.text}>{tag.text}</li>;
+                                })}
+                            </ul>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
+                </Body>
+                <Footer>
+                    <div className="like-button">
+                        <img
+                            className="like-image"
+                            src={likeImageRoute}
+                            alt=""
+                            onClick={() => {
+                                if (!like) {
+                                    likedPublication();
+                                } else {
+                                    unlikedPublication();
+                                }
+                            }}
+                        />
+                        <p className="like-count">{numbersOfLikes}</p>
+                    </div>
+                </Footer>
+            </Content>
+            <AlertMessageComponent
+                message={likeOrUnlikeErrorMessage}
+                severity={'error'}
+                open={likeOrUnlikeError}
+                setOpen={setLikeOrUnlikeError}
+            />
+        </div>
     );
 };
 

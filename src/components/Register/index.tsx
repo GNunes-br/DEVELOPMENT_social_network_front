@@ -1,55 +1,55 @@
-import { Backdrop, CircularProgress } from '@mui/material'
-import Link from 'next/link'
-import Router from 'next/router'
-import React, { useState } from 'react'
-import { api } from '../../services/api'
-import AlertMessageComponent from '../AlertMessage'
-import { Body, Content } from './styles'
+import { Backdrop, CircularProgress } from '@mui/material';
+import Link from 'next/link';
+import Router from 'next/router';
+import React, { useState } from 'react';
+import { api } from '../../services/api';
+import AlertMessageComponent from '../AlertMessage';
+import { Body, Content } from './styles';
 
 const RegisterComponent = (): JSX.Element => {
-    const [surname, setSurname] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [nickname, setNickname] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [registerError, setRegisterError] = useState(false)
-    const [registerErrorMessage, setRegisterErrorMessage] = useState('')
-    const [registerLoading, setRegisterLoading] = useState(false)
+    const [registerError, setRegisterError] = useState(false);
+    const [registerErrorMessage, setRegisterErrorMessage] = useState('');
+    const [registerLoading, setRegisterLoading] = useState(false);
 
     const submitForm = async (event: React.FormEvent): Promise<void> => {
-        event.preventDefault()
+        event.preventDefault();
 
-        const passwordsDoNotMatch = password !== passwordConfirmation
+        const passwordsDoNotMatch = password !== confirmPassword;
         if (passwordsDoNotMatch) {
-            setRegisterError(true)
-            setRegisterErrorMessage('As senhas não conferem!')
-            return
+            setRegisterError(true);
+            setRegisterErrorMessage('As senhas não conferem!');
+            return;
         }
 
-        setRegisterLoading(true)
-        setRegisterError(false)
+        setRegisterLoading(true);
+        setRegisterError(false);
 
         await api
-            .post('/register', {
-                surname,
+            .post('/user/create', {
+                nickname,
                 email,
                 password,
-                passwordConfirmation,
+                confirmPassword,
             })
             .then(() => {
-                Router.push('/login')
+                Router.push('/login');
             })
             .catch(error => {
-                setRegisterLoading(false)
+                setRegisterLoading(false);
                 if (error?.response?.error?.message) {
-                    const errorMessage = error.response.error.message
-                    setRegisterErrorMessage(errorMessage)
+                    const errorMessage = error.response.error.message;
+                    setRegisterErrorMessage(errorMessage);
                 } else {
-                    setRegisterErrorMessage('Algo inesperado aconteceu!')
+                    setRegisterErrorMessage('Algo inesperado aconteceu!');
                 }
-                setRegisterError(true)
-            })
-    }
+                setRegisterError(true);
+            });
+    };
 
     return (
         <div>
@@ -63,11 +63,11 @@ const RegisterComponent = (): JSX.Element => {
 
                         <div className="form-content">
                             <input
-                                name="surname"
+                                name="nickname"
                                 type="text"
-                                value={surname}
+                                value={nickname}
                                 onChange={event =>
-                                    setSurname(event.target.value)
+                                    setNickname(event.target.value)
                                 }
                                 placeholder="Apelido"
                                 required
@@ -91,11 +91,11 @@ const RegisterComponent = (): JSX.Element => {
                                 required
                             />
                             <input
-                                name="password-confirm"
+                                name="confirmPassword"
                                 type="password"
-                                value={passwordConfirmation}
+                                value={confirmPassword}
                                 onChange={event =>
-                                    setPasswordConfirmation(event.target.value)
+                                    setConfirmPassword(event.target.value)
                                 }
                                 placeholder="Confirmar senha"
                                 required
@@ -130,7 +130,7 @@ const RegisterComponent = (): JSX.Element => {
                 setOpen={setRegisterError}
             />
         </div>
-    )
-}
+    );
+};
 
-export default RegisterComponent
+export default RegisterComponent;

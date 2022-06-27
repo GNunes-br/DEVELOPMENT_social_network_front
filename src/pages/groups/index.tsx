@@ -1,4 +1,4 @@
-import FeedComponent from '../../components/Feed';
+import GroupsComponent from '../../components/Groups';
 import HomeLayout from '../../layout/Home';
 import { api } from '../../services/api';
 
@@ -7,36 +7,22 @@ interface Props {
         nickname: string;
         profilePicture: string;
     };
-    publications: Array<any>;
     groups: Array<any>;
 }
 
-const FeedPage = (props: Props): JSX.Element => {
-    const { user, publications, groups } = props;
+const GroupsPage = (props: Props): JSX.Element => {
+    const { user, groups } = props;
 
     return (
-        <HomeLayout
-            child={
-                <FeedComponent
-                    publications={publications}
-                    user={user}
-                    groups={groups}
-                />
-            }
-            user={user}
-        />
+        <HomeLayout child={<GroupsComponent groups={groups} />} user={user} />
     );
 };
 
 export async function getStaticProps(ctx: any) {
     try {
-        const publicationsResponse = await api.get('/publication');
-
         const userDetailsResponse = await api.get('/user');
 
         const groupsResponse = await api.get('/group');
-
-        const publications = publicationsResponse.data;
 
         const {
             data: { name: nickname },
@@ -50,7 +36,6 @@ export async function getStaticProps(ctx: any) {
                     nickname,
                     profilePicture: 'not-profile-picture-icon.svg',
                 },
-                publications,
                 groups,
             },
         };
@@ -64,4 +49,4 @@ export async function getStaticProps(ctx: any) {
     }
 }
 
-export default FeedPage;
+export default GroupsPage;

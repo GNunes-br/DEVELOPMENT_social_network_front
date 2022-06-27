@@ -1,48 +1,46 @@
-import { Backdrop, CircularProgress } from '@mui/material'
-import Cookies from 'js-cookie'
-import Link from 'next/link'
-import Router from 'next/router'
-import React, { useState } from 'react'
-import { api } from '../../services/api'
-import AlertMessageComponent from '../AlertMessage'
-import { Body, Content } from './styles'
+import { Backdrop, CircularProgress } from '@mui/material';
+import Cookies from 'js-cookie';
+import Link from 'next/link';
+import Router from 'next/router';
+import React, { useState } from 'react';
+import { api } from '../../services/api';
+import AlertMessageComponent from '../AlertMessage';
+import { Body, Content } from './styles';
 
 const LoginComponent = (): JSX.Element => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [nickname, setNickname] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [loginError, setLoginError] = useState(false)
-    const [loginErrorMessage, setLoginErrorMessage] = useState('')
-    const [loginLoading, setLoginLoading] = useState(false)
+    const [loginError, setLoginError] = useState(false);
+    const [loginErrorMessage, setLoginErrorMessage] = useState('');
+    const [loginLoading, setLoginLoading] = useState(false);
 
     const submitForm = async (event: React.FormEvent): Promise<void> => {
-        event.preventDefault()
+        event.preventDefault();
 
-        setLoginLoading(true)
-        setLoginError(false)
+        setLoginLoading(true);
+        setLoginError(false);
 
         await api
-            .get('/login', {
-                params: {
-                    email,
-                    password,
-                },
+            .post('/user/login', {
+                nickname,
+                password,
             })
             .then((response: any) => {
-                Cookies.set('token', response.data.access_token)
-                Router.push('/feed')
+                Cookies.set('token', response.data.token);
+                Router.push('/feed');
             })
             .catch(error => {
-                setLoginLoading(false)
+                setLoginLoading(false);
                 if (error?.response?.error?.message) {
-                    const errorMessage = error.response.error.message
-                    setLoginErrorMessage(errorMessage)
+                    const errorMessage = error.response.error.message;
+                    setLoginErrorMessage(errorMessage);
                 } else {
-                    setLoginErrorMessage('Algo inesperado aconteceu!')
+                    setLoginErrorMessage('Algo inesperado aconteceu!');
                 }
-                setLoginError(true)
-            })
-    }
+                setLoginError(true);
+            });
+    };
 
     return (
         <div>
@@ -56,11 +54,13 @@ const LoginComponent = (): JSX.Element => {
 
                         <div className="form-content">
                             <input
-                                name="email"
-                                type="email"
-                                value={email}
-                                onChange={event => setEmail(event.target.value)}
-                                placeholder="E-mail"
+                                name="nickname"
+                                type="nickname"
+                                value={nickname}
+                                onChange={event =>
+                                    setNickname(event.target.value)
+                                }
+                                placeholder="Apelido"
                                 required
                             />
                             <input
@@ -104,7 +104,7 @@ const LoginComponent = (): JSX.Element => {
                 setOpen={setLoginError}
             />
         </div>
-    )
-}
+    );
+};
 
-export default LoginComponent
+export default LoginComponent;

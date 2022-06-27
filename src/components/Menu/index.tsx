@@ -1,4 +1,6 @@
-import InRelevanceIcon from '../../utils/icons/in-relevance-icon';
+import Cookies from 'js-cookie';
+import Link from 'next/link';
+import Router from 'next/router';
 import MyGroupsIcon from '../../utils/icons/my-groups-icon';
 import MyProfileIcon from '../../utils/icons/my-profile-icon';
 import MyPublicationsIcon from '../../utils/icons/my-publications-icon';
@@ -23,28 +25,40 @@ const MenuComponent = (props: Props): JSX.Element => {
             <Body>
                 <div className="menu-items">
                     <ul>
-                        <li>
-                            <MyProfileIcon />
-                            <span>Meu Perfil</span>
-                        </li>
-                        <li>
-                            <MyGroupsIcon />
-                            <span>Meus Grupos</span>
-                        </li>
-                        <li>
-                            <MyPublicationsIcon />
-                            <span>Publicações</span>
-                        </li>
-                        <li>
+                        <Link href={'profile'}>
+                            <li>
+                                <MyProfileIcon />
+                                <span>Meu Perfil</span>
+                            </li>
+                        </Link>
+                        <Link href={'groups'}>
+                            <li>
+                                <MyGroupsIcon />
+                                <span>Explorar grupos</span>
+                            </li>
+                        </Link>
+                        <Link href={'feed'}>
+                            <li>
+                                <MyPublicationsIcon />
+                                <span>Publicações</span>
+                            </li>
+                        </Link>
+                        {/* <li>
                             <InRelevanceIcon />
                             <span>Em Alta</span>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
-                <div className="exit-button"></div>
             </Body>
             <Footer>
-                <button>Sair</button>
+                <button
+                    onClick={() => {
+                        Cookies.remove('token');
+                        Router.push('/login');
+                    }}
+                >
+                    Sair
+                </button>
             </Footer>
         </Content>
     );

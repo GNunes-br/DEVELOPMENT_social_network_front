@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import pxToRemHelper from "../../utils/helpers/px-to-rem-helper";
+import styled from 'styled-components';
+import pxToRemHelper from '../../utils/helpers/px-to-rem-helper';
 
 export const Content = styled.div`
     flex-direction: column;
     justify-content: start;
 
-    min-width: 720px;
-    max-width: 1450px;
+    min-width: 1215px;
+    max-width: 1215px;
 
     max-height: 1465px;
 
@@ -16,7 +16,7 @@ export const Content = styled.div`
     padding-right: ${pxToRemHelper(15)};
     padding-top: ${pxToRemHelper(15)};
     padding-bottom: ${pxToRemHelper(15)};
-`
+`;
 
 export const Body = styled.div`
     flex-direction: column;
@@ -52,25 +52,25 @@ export const Body = styled.div`
             background-color: ${props => props.theme.colors.primary};
 
             border-radius: 50%;
-            border: 1px solid #FFFFFF;
+            border: 1px solid #ffffff;
 
             box-shadow: 1px 1px 2px #888;
 
             z-index: 1000;
 
-            transition: transform .3s;
+            transition: transform 0.3s;
 
             :hover {
-                transform:scale(1.2,1.2) 
+                transform: scale(1.2, 1.2);
             }
 
             svg {
-                fill: #FFFFFF;
+                fill: #ffffff;
 
                 height: 40px;
                 width: 40px;
 
-                transition: transform .3s ease-in-out;
+                transition: transform 0.3s ease-in-out;
 
                 :hover {
                     transform: rotate(90deg);
@@ -78,4 +78,4 @@ export const Body = styled.div`
             }
         }
     }
-`
+`;

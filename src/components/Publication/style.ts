@@ -1,15 +1,18 @@
-import styled from "styled-components";
-import pxToRemHelper from "../../utils/helpers/px-to-rem-helper";
+import styled from 'styled-components';
+import pxToRemHelper from '../../utils/helpers/px-to-rem-helper';
 
 export const Content = styled.div`
     flex-direction: column;
+
+    min-width: 1200px;
+    max-width: 1450px;
 
     background-color: ${props => props.theme.colors.secondary_background};
 
     border-radius: ${pxToRemHelper(10)};
 
     margin-bottom: ${pxToRemHelper(15)};
-`
+`;
 
 export const Header = styled.div`
     flex-direction: row;
@@ -46,14 +49,13 @@ export const Header = styled.div`
     }
 
     .date-and-time {
-
         margin-right: ${pxToRemHelper(15)};
 
         color: ${props => props.theme.colors.background};
         font-size: ${pxToRemHelper(13)};
         text-align: center;
     }
-`
+`;
 
 export const Body = styled.div`
     flex-direction: column;
@@ -61,9 +63,8 @@ export const Body = styled.div`
     align-items: flex-start;
 
     padding: ${pxToRemHelper(15)};
-    
+
     .publication-content {
-        
         max-height: 200px;
         overflow: auto;
 
@@ -74,37 +75,37 @@ export const Body = styled.div`
         margin-top: ${pxToRemHelper(15)};
 
         ul {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: start;
-                align-items: flex-start;
-                
-                overflow: auto;
-            }
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: start;
+            align-items: flex-start;
 
-            li {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                
-                background-color: #D4D4D4;
-                                
-                list-style: none;
-                
-                font-size: small;
-                font-weight: normal;
-                text-align: center;
-                color: ${props => props.theme.colors.primary};
-                
-                padding: ${pxToRemHelper(6)};
+            overflow: auto;
+        }
 
-                margin: ${pxToRemHelper(2)};
-                
-                border-radius: ${pxToRemHelper(5)};
-            }
+        li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            background-color: #d4d4d4;
+
+            list-style: none;
+
+            font-size: small;
+            font-weight: normal;
+            text-align: center;
+            color: ${props => props.theme.colors.primary};
+
+            padding: ${pxToRemHelper(6)};
+
+            margin: ${pxToRemHelper(2)};
+
+            border-radius: ${pxToRemHelper(5)};
+        }
     }
-`
+`;
 
 export const Footer = styled.div`
     flex-direction: row;
@@ -132,7 +133,7 @@ export const Footer = styled.div`
         .like-count {
             font-size: small;
             text-align: center;
-            color: #f9595f
+            color: #f9595f;
         }
     }
-`
+`;
