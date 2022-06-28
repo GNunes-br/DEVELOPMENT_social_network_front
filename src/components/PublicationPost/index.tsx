@@ -56,7 +56,7 @@ const PublicationPostComponent = (props: Props): JSX.Element => {
             .post('/publication/create', {
                 text: publicationText,
                 tags: publicationTags,
-                group_name: publicationGroup,
+                'group-name': publicationGroup,
             })
             .then(() => {
                 handleCloseModal();
