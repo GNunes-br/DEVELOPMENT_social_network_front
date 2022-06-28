@@ -14,6 +14,7 @@ interface Props {
         id_publication: number;
         date: string;
         group_name: string;
+        liked: boolean;
         likes: number;
         tags: Array<{ text: string }>;
         content: string;

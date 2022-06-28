@@ -59,7 +59,10 @@ const PublicationPostComponent = (props: Props): JSX.Element => {
                 'group-name': publicationGroup,
             })
             .then(() => {
+                setPostPubLoading(false);
+                setPostPubError(false);
                 handleCloseModal();
+                window.location.reload();
             })
             .catch(error => {
                 setPostPubLoading(false);
